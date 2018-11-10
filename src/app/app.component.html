@@ -1,0 +1,28 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title><b>TimeLess</b></mat-card-title>
+    <mat-card-subtitle>What's your focus today</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngFor="let _card of _cards;let _toDoId=index">
+      <span class="_row" *ngIf="_card.hoveredInput">
+        <mat-checkbox class="_checkBox" [(ngModel)]="_card.checked">
+        </mat-checkbox>
+        <span [style.text-decoration]="_card.checked ? 'line-through':'none'" (click)="!_card.checked ? _card.hoveredInput = !_card.hoveredInput:''">
+          {{_card.toDo}}
+        </span>
+      </span>
+      <mat-form-field class="input_margin" *ngIf="!_card.hoveredInput">
+        <input matInput type="text" placeholder="" [(ngModel)]="_card.toDo" (blur)="!_card.checked ? _card.hoveredInput = !_card.hoveredInput:''"  (keyup.enter)="!_card.checked ? _card.hoveredInput = !_card.hoveredInput:''" (mouseout)="_card.hoveredInput = !_card.hoveredInput"
+        />
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+  </mat-card-content>
+  <mat-card-actions class="action-buttons">
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
